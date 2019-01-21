@@ -1,39 +1,37 @@
 # cypress
 
-## Project setup
-```
-npm install
+## start the container
+
+After starting the container, it will run the unit test and start the dev server and run the e2e tests
+
+```bash
+compose-compose up
 ```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
+## Use dev.sh
+
+```bash
+# In the project, root dir
+. ./dev.sh
 ```
 
-### Compiles and minifies for production
-```
-npm run build
+```bash
+# run the unit tests
+docker-unit
+
+# run the e2e test
+docker-e2e
+
+# install package
+docker-npm install package_name
 ```
 
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
+```bash
+# After installing the package. Remember to rebuild the image when starting the container next time
+docker-compose build web
 ```
 
-### Run your end-to-end tests
+```bash
+# stop the containers
+docker-compose down
 ```
-npm run test:e2e
-```
-
-### Run your unit tests
-```
-npm run test:unit
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
