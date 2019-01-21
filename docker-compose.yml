@@ -1,0 +1,27 @@
+version: '3'
+services:
+  web:
+    build:
+      context: ./
+      dockerfile: ./docker/node/Dockerfile
+    image: web_collab
+    container_name: web_collab
+    command: npm run serve
+    volumes:
+      - .:/app/
+      - /app/node_modules
+    ports:
+      - "8080:8080"
+  e2e:
+      build:
+        context: ./
+        dockerfile: ./docker/cypress/Dockerfile
+      image: e2e_cypress
+      container_name: e2e_cypress
+      volumes:
+        - ./tests:/app/tests
+      depends_on:
+        - web
+      environment:
+        - CYPRESS_baseUrl=http://web:8080
+      command: npx cypress run
